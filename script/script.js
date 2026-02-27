@@ -1,73 +1,56 @@
-console.log('Js added.')
-// Total Job Count
-function totalJobCount(){
-    const totalJob = document.getElementById('total-job')
-    const jobContainer = document.getElementById('job-card-container');
-    const jobCount = jobContainer.getElementsByClassName('job-card');
-    totalJob.innerText = jobCount.length;  
+
+let interviewList = [];
+let rejectedList = [];
+let currentStatus = 'btn-all'
+
+let totalJob = document.getElementById('total-job');
+let interviewJob = document.getElementById('interview-job');
+let rejectedJob = document.getElementById('rejected-job');
+
+const allBtn = document.getElementById('btn-all')
+const interviewBtn = document.getElementById('btn-interview')
+const rejectedBtn = document.getElementById('btn-rejected')
+
+const allCardSection = document.getElementById('job-card-container');
+const mainContainer = document.querySelector('main')
+const filterSection = document.getElementById('filtered-section')
+
+function calculateCount() {
+    totalJob.innerText = allCardSection.children.length //3
+    interviewJob.innerText = interviewList.length
+    rejectedJob.innerText = rejectedList.length
 }
 
+calculateCount();
 
-// clicking All Button function
-document.getElementById('btn-all').addEventListener('click', function(){
+// step 1;
+function toggleStyle(id) {
+    // removing bg for all
+    allBtn.classList.add('btn-soft');
+    interviewBtn.classList.add('btn-soft');
+    rejectedBtn.classList.add('btn-soft');
+
+
+    // console.log(id);
+    const selected = document.getElementById(id)//this is the button that clicked for filter
+
+    currentStatus = id
+    console.log(currentStatus);
+    // console.log(selected);
+
+    // adding bg for current button
+    selected.classList.remove('btn-soft')
+    
+    // step 1 finish
+
+    if (id == 'btn-interview' || id == 'btn-rejected') {
+        allCardSection.classList.add('hidden');
+        filterSection.classList.remove('hidden')
+        renderThriving()
+    } else if (id == 'btn-all') {
+        allCardSection.classList.remove('hidden');
+        filterSection.classList.add('hidden')
+    }
 
    
-    document.getElementById('job-card-container').classList.remove('hidden');
-    document.getElementById('Interview-section').classList.add('hidden');
-
-    document.getElementById('btn-all').classList.remove('btn-soft');
-    document.getElementById('btn-interview').classList.add('btn-soft');
-})
-
-
-
-// Clicking Interview button Functions
-document.getElementById('btn-interview').addEventListener('click', function(){
-
-    const interviewJobs = document.getElementById('interview-job').innerText;
-    if(Number(interviewJobs) > 0){
-        document.getElementById('interview-zero').classList.add('hidden');
-    }
-    if(Number(interviewJobs) == 0){
-        document.getElementById('interview-zero').classList.remove('hidden');
-    }
-
-
-    document.getElementById('job-card-container').classList.add('hidden');
-    document.getElementById('Interview-section').classList.remove('hidden');
-
-    document.getElementById('btn-all').classList.add('btn-soft');
-    document.getElementById('btn-interview').classList.remove('btn-soft');
-})
-
-
-// clicking delete button functions
-function Delete(id){
-   const deleteJob = document.getElementById(id).remove();
-   
-   totalJobCount();
 }
-
-
-// Interview function
-function Interview(id){
-    console.log('Button clicked')
-    const jobCard = document.getElementById(id);
-    const status = jobCard.querySelector('h3');
-    status.style.background = 'lightblue';
-    status.innerText = 'Interview';
-
-
-    const jobCardClone = jobCard.cloneNode(true);
-
-    const interviewSection = document.getElementById('Interview-section');
-    interviewSection.appendChild(jobCardClone);
-
-    const interviewJobCard = interviewSection.getElementsByClassName('job-card');
-    document.getElementById('interview-job').innerText = interviewJobCard.length;
-    console.log(interviewJobCard.length);
-
-}
-
-
-totalJobCount();

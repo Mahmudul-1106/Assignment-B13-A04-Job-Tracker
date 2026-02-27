@@ -42,7 +42,7 @@
             </div>
             <div class="w-full p-5 bg-[#FFF] rounded-lg items-center">
                 <p>Rejected</p>
-                <p class="font-bold text-[#EF4444]">0</p>
+                <p class="font-bold text-[#EF4444]" id="rejected-job">0</p>
             </div>
         </div>
     </header>
@@ -50,13 +50,29 @@
     <main class="max-w-screen-lg mx-auto">
         <h3 class="text-xl font-semibold py-7">Available Jobs</h3>
         <div class="space-x-1">
-            <button class="btn btn-primary  px-10 " id="btn-all">All</button>
-            <button class="btn btn-primary btn-soft " id="btn-interview">Interview</button>
-            <button class="btn btn-primary btn-soft ">Rejected</button>
+            <button onclick="toggleStyle('btn-all')" class="btn btn-primary  px-10 " id="btn-all">All</button>
+            <button onclick="toggleStyle('btn-interview')" class="btn btn-primary btn-soft "
+                id="btn-interview">Interview</button>
+            <button onclick="toggleStyle('btn-rejected')" class="btn btn-primary btn-soft "
+                id="btn-rejected">Rejected</button>
         </div>
+
+
+        <!-- filtered-section -->
+        <section id="filtered-section" class="hidden">
+            <div id="interview-zero" class=" my-5 py-20 text-center  items-center bg-[#fff] rounded-lg mx-auto">
+
+                <img class="text-center mx-auto items-center" src="./assets/jobs.png" alt="">
+                <h2 class="text-xl font-semibold">No jobs available</h2>
+                <p class="text-[#64748B]">Check back soon for new job opportunities</p>
+            </div>
+
+        </section>
 
         <!--All job-card-container section -->
         <section id="job-card-container">
+
+            <!-- card-1 -->
             <div class="job-card my-5 p-6 flex justify-between bg-[#fff] rounded-lg" id="job-1">
                 <div>
                     <h4 class="text-xl font-semibold">Mamun Mobile First Corp</h4>
@@ -82,6 +98,7 @@
                 </div>
             </div>
 
+            <!-- card-2 -->
             <div class="job-card my-5 p-6 flex justify-between bg-[#fff] rounded-lg" id="job-2">
                 <div>
                     <h4 class="text-xl font-semibold">WebFlow Agency</h4>
@@ -105,6 +122,7 @@
                 </div>
             </div>
 
+            <!-- card-3 -->
             <div class="job-card my-5 p-6 flex justify-between bg-[#fff] rounded-lg" id="job-3">
                 <div>
                     <h4 class="text-xl font-semibold">DataViz Solutions</h4>
@@ -128,6 +146,7 @@
                 </div>
             </div>
 
+            <!-- card-4 -->
             <div class="job-card my-5 p-6 flex justify-between bg-[#fff] rounded-lg" id="job-4">
                 <div>
                     <h4 class="text-xl font-semibold">CloudFirst Inc</h4>
@@ -151,6 +170,7 @@
                 </div>
             </div>
 
+            <!-- card-5 -->
             <div class="job-card my-5 p-6 flex justify-between bg-[#fff] rounded-lg" id="job-5">
                 <div>
                     <h4 class="text-xl font-semibold">Innovation Labs</h4>
@@ -174,6 +194,7 @@
                 </div>
             </div>
 
+            <!-- card-6 -->
             <div class="job-card my-5 p-6 flex justify-between bg-[#fff] rounded-lg" id="job-6">
                 <div>
                     <h4 class="text-xl font-semibold">MegaCorp Solutions</h4>
@@ -197,6 +218,7 @@
                 </div>
             </div>
 
+            <!-- card-7 -->
             <div class="job-card my-5 p-6 flex justify-between bg-[#fff] rounded-lg " id="job-7">
                 <div>
                     <h4 class="text-xl font-semibold">StartupXYZ</h4>
@@ -220,6 +242,7 @@
                 </div>
             </div>
 
+            <!-- card-8 -->
             <div class="job-card my-5 p-6 flex justify-between bg-[#fff] rounded-lg " id="job-8">
                 <div>
                     <h4 class="text-xl font-semibold">TechCorp Industries</h4>
@@ -245,16 +268,7 @@
         </section>
 
 
-        <!-- Interview Section -->
-        <section id="Interview-section" class="hidden">
-            <div id="interview-zero" class=" my-5 py-20 text-center  items-center bg-[#fff] rounded-lg mx-auto">
 
-                <img class="text-center mx-auto items-center" src="./assets/jobs.png" alt="">
-                <h2 class="text-xl font-semibold">No jobs available</h2>
-                <p class="text-[#64748B]">Check back soon for new job opportunities</p>
-            </div>
-
-        </section>
     </main>
 
     <script src="./script/script.js"></script>
