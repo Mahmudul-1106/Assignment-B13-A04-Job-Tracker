@@ -51,6 +51,86 @@ function toggleStyle(id) {
         allCardSection.classList.remove('hidden');
         filterSection.classList.add('hidden')
     }
-
-   
+ 
 }
+
+// step-2
+mainContainer.addEventListener('click', function (event) {
+    if (event.target.classList.contains('job-interview')) {
+        const parenNode = event.target.parentNode.parentNode;
+        
+
+        const jobTitle = parenNode.querySelector('.job-title').innerText
+        const jobType = parenNode.querySelector('.job-type').innerText
+        const jobSalary = parenNode.querySelector('.job-salary').innerText
+        const jobStatus = parenNode.querySelector('.job-status').innerText
+        const jobDes = parenNode.querySelector('.job-des').innerText
+
+        parenNode.querySelector('.job-status').innerText = 'INTERVIEW'
+        parenNode.querySelector('.job-status').classList.add('bg-green-300')
+
+        const cardInfo = {
+            jobTitle,
+            jobType,
+            jobSalary,
+            jobStatus: 'Interview',
+            jobDes
+        }
+
+        const interviewExist = interviewList.find(item => item.jobTitle == cardInfo.jobTitle)
+
+        if (!interviewExist) {
+            interviewList.push(cardInfo)
+        }
+
+        // step 2 finish
+        // removing the job from reject list
+        rejectedList = rejectedList.filter(item => item.plantName != cardInfo.plantName)
+
+        // after remove rerender the html
+        if (currentStatus == 'btn-rejected') {
+            renderStruggling()
+        }
+
+         calculateCount()
+
+
+    } else if (event.target.classList.contains('job-rejected')) {
+        const parenNode = event.target.parentNode.parentNode;
+
+        const jobTitle = parenNode.querySelector('.job-title').innerText
+        const jobType = parenNode.querySelector('.job-type').innerText
+        const jobSalary = parenNode.querySelector('.job-salary').innerText
+        const jobStatus = parenNode.querySelector('.job-status').innerText
+        const jobDes = parenNode.querySelector('.job-des').innerText
+
+        parenNode.querySelector('.job-status').innerText = 'REJECTED'
+
+        const cardInfo = {
+            jobTitle,
+            jobType,
+            jobSalary,
+            jobStatus: 'Rejected',
+            jobDes
+        }
+
+        const rejectExist = rejectedList.find(item => item.plantName == cardInfo.plantName)
+
+        if (!rejectExist) {
+            rejectedList.push(cardInfo)
+        }
+
+        // removing job from interview list
+        interviewList = interviewList.filter(item => item.jobTitle != cardInfo.jobTitle)
+
+        
+
+        // after remove rerender the html
+        if (currentStatus == "btn-interview") {
+            renderThriving();
+        }
+        calculateCount()
+
+    }
+
+})
