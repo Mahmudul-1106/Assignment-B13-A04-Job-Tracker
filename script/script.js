@@ -60,6 +60,13 @@ function toggleStyle(id) {
         allCardSection.classList.remove('hidden');
         filterSection.classList.add('hidden');
         jobZero.classList.add('hidden')
+
+        if(allCardSection.children.length === 0){
+        jobZero.classList.remove('hidden')
+    }
+    else{
+        jobZero.classList.add('hidden')
+    }
     }
  
 }
@@ -115,7 +122,7 @@ mainContainer.addEventListener('click', function (event) {
         const jobStatus = parenNode.querySelector('.job-status').innerText
         const jobDes = parenNode.querySelector('.job-des').innerText
 
-        parenNode.querySelector('.job-status').innerText = 'REJECTED'
+        parenNode.querySelector('.job-status').innerText = 'REJECTED';
         parenNode.querySelector('.job-status').classList.remove('bg-green-300')
         parenNode.querySelector('.job-status').classList.add('bg-red-300')
 
@@ -184,10 +191,7 @@ function renderInterview() {
                     <button class="job-interview btn btn-outline btn-success">INTERVIEW</button>
                     <button class="job-rejected btn btn-outline btn-error">REJECTED</button>
                 </div>
-                <div>
-                    <button class="job-delete" onclick="Delete('job-1')" class="btn rounded-full "><i
-                            class="fa-solid fa-trash-can "></i></button>
-                </div>
+                
         `
         filterSection.appendChild(div)
     }
@@ -228,12 +232,32 @@ function renderRejected() {
                     <button class="job-interview btn btn-outline btn-success">INTERVIEW</button>
                     <button class="job-rejected btn btn-outline btn-error">REJECTED</button>
                 </div>
-                <div>
-                    <button class="job-delete" onclick="Delete('job-1')" class="btn rounded-full "><i
-                            class="fa-solid fa-trash-can "></i></button>
-                </div>
+                
         `
         filterSection.appendChild(div)
     }
 }
+
+
+// delete function
+function deleteJob(event){
+    let removeJob =  event.target.parentNode.parentNode.parentNode;
+    removeJob.remove();
+
+    let removeTitle = removeJob.querySelector('.job-title').innerText;
+
+    interviewList = interviewList.filter(item => item.jobTitle != removeTitle);
+    rejectedList = rejectedList.filter(item => item.jobTitle != removeTitle);
+    calculateCount();
+
+    if(allCardSection.children.length === 0){
+        jobZero.classList.remove('hidden')
+    }
+    else{
+        jobZero.classList.add('hidden')
+    }
+
+}
+
+
 
