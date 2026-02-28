@@ -242,20 +242,21 @@ function renderRejected() {
 // delete function
 function deleteJob(event){
     let removeJob =  event.target.parentNode.parentNode.parentNode;
-    removeJob.remove();
+    
+    // console.log(removeJob);
 
     let removeTitle = removeJob.querySelector('.job-title').innerText;
 
     interviewList = interviewList.filter(item => item.jobTitle != removeTitle);
     rejectedList = rejectedList.filter(item => item.jobTitle != removeTitle);
+
+    removeJob.remove();
     calculateCount();
 
     if(allCardSection.children.length === 0){
         jobZero.classList.remove('hidden')
     }
-    else{
-        jobZero.classList.add('hidden')
-    }
+    
 
 }
 
